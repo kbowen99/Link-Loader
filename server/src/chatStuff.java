@@ -12,6 +12,7 @@ public class chatStuff extends Thread{
 	public chatStuff(server chatterServer, Socket outlit) {
 	   cs = chatterServer;
 	   o = outlit;
+	   System.out.println(o.getInetAddress().toString());
 	}
 	
 	
@@ -26,7 +27,12 @@ public class chatStuff extends Thread{
 				if(message == null) {
 					running = false;
 				} else {
-					cs.sendMessage(message);
+					//cs.sendMessage(message);
+					System.out.println(message);
+					System.out.println(downloader.containsChallenge(message));
+					if (downloader.containsChallenge(message)){
+						downloader.checkPassword(message);
+					}
 				}
 				
 			} catch (IOException e) {
