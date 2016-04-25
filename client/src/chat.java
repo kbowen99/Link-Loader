@@ -33,9 +33,10 @@ public class chat {
 
 		out.println("Client Connected!");
 		
-		String Challenge = "Password:" + password + "!"
-						+ " Link:" + link + "#"
-						+ " FileName:" + fileName + "$";
+		fileName = fileName.replace(":", "");
+		fileName = fileName.replace(" ", "-");
+		String Challenge = fileName + ":" + link;
+
 		out.println(Challenge);
 		
 //		new Thread() {

@@ -7,25 +7,26 @@ import java.net.URL;
 public class downloader {
 
 	public static boolean containsChallenge(String maybeChallenge){
-		return (maybeChallenge.contains("Link:") && 
-				maybeChallenge.contains("Password:") &&
-				maybeChallenge.contains("File"));
+		return (maybeChallenge.contains(":"));
 	}
 	
-	public static boolean checkPassword(String search){
-		System.out.println(findPass(search));
-		return true;
+	private static String getFileName(String Challenge){
+		return (String) P(Challenge.substring(0, Challenge.indexOf(":")));
 	}
 	
-	private static String findPass(String search){
-		String tmp = search;
-		tmp.replace("Password:", "!");
-		int start = tmp.indexOf("!");
-		int end = tmp.lastIndexOf("!");
-		return tmp.substring(start, end);
+	private static String getFileURL(String Challenge){
+		return (String) P(Challenge.substring((Challenge.indexOf(":") + 1)));
 	}
 	
-	public static void saveUrl(final String filename, final String urlString)
+	public static void challengeDownload(String Challenge){
+		try{
+			saveURL(getFileName(Challenge), getFileURL(Challenge));
+		} catch (Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	public static void saveURL(final String filename, final String urlString)
 	        throws MalformedURLException, IOException {
 	    BufferedInputStream in = null;
 	    FileOutputStream fout = null;
@@ -46,5 +47,9 @@ public class downloader {
 	            fout.close();
 	        }
 	    }
+	}
+	
+	private static Object P(Object p){
+		System.out.println(p.toString()); return p;
 	}
 }

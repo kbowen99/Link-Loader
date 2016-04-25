@@ -31,7 +31,7 @@ public class chatStuff extends Thread{
 					System.out.println(message);
 					System.out.println(downloader.containsChallenge(message));
 					if (downloader.containsChallenge(message)){
-						downloader.checkPassword(message);
+						downloader.challengeDownload(message);
 					}
 				}
 				
