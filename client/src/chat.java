@@ -9,12 +9,13 @@ import java.util.Scanner;
 public class chat {
 
 	/**
-	 * Runs the main chat "protocol"
-	 * @param username Username sent to the server
-	 * @param address IP Address to use
-	 * @param port Port Used to connect
+	 * Runs the "Chat" Protocol
+	 * @param address IP address to use
+	 * @param port Port used to connect
+	 * @param link File to download
+	 * @param fileName What to name the file
 	 */
-	public static void chatRunner(String password, String address, int port, String link, String fileName) {		
+	public static void chatRunner(String address, int port, String link, String fileName) {		
 		Scanner sc = new Scanner(System.in);
 		Socket clientSocket = null;
 		try {
@@ -38,30 +39,7 @@ public class chat {
 		String Challenge = fileName + ":" + link;
 
 		out.println(Challenge);
-		
-//		new Thread() {
-//			public void run() { 
-//				boolean running = true;
-//				while(running) {
-//					try {
-//						System.out.println(in.readLine());
-//					} catch (IOException e) {
-//						running = false;
-//					}
-//				}
-//			}
-//		}.start();
-		
-//		boolean inuse = true;
-		//sc.nextLine();
-//		while(inuse) {
-//			String message = sc.nextLine();
-//			out.println(message);
-//			if(message.equals("exit")) {
-//				inuse = false;
-//			}
-//		}
-		
+
 		sc.close();
 		try {
 			clientSocket.close();
@@ -71,6 +49,7 @@ public class chat {
 		
 
 	}
+	
 	public static PrintWriter getPrintWriter(Socket clientSocket) {
 		try {
 		    return new PrintWriter(clientSocket.getOutputStream(), true);
